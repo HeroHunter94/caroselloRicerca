@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carosello</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/webp" href="./OIP.jpg" />
+  </head>
+  <body>
+    <h1>Carousel of Images</h1>
+
+    <video
+      id="videoPlayer"
+      width="500px"
+      controls
+      muted
+      loop
+      style="display: none"
+    >
+      <source id="videoSource" type="video/mp4" />
+    </video>
+
+    <a
+      href="https://www.delftstack.com/howto/javascript/javascript-array-of-images/"
+    >
+      <img id="img" src="inicio.jpg" alt="randomImage" style="display: block" />
+    </a>
+
+    <div class="carousel-controls">
+      <p><button type="button" id="btn-next" onclick="back()">Back</button></p>
+      <label for="input"></label>
+      <input type="text" value="look for an image of a city" id="input" />
+      <p><button type="button" onclick="lookFor()">Check</button></p>
+      <p>
+        <button type="button" id="btn-previous" onclick="next()">Next</button>
+      </p>
+    </div>
+    <p id="nameImg"></p>
+    <p id="description"></p>
+    <p id="output"></p>
+    <footer>
+      <hr />
+      <p>Author name: Danilo Russo</p>
+      <a href="mailto:danilorusso.info94@gmail.com">Contact me</a>
+    </footer>
+
+    <script>
+      const IMG = document.getElementById("img");
+      const NAME = document.getElementById("nameImg");
+      const DESC = document.getElementById("description");
+      const INPUT = document.getElementById("input");
+
+      const ROUTE = "./";
+
+      const images = [
+        {
+          archive: "barcelona.jpg",
+          name: "barcelona",
+          tooltip: "City of Spain",
+          description:
+            "A vibrant Mediterranean city known for Gaudí’s architecture, sandy beaches, and lively street culture.",
+        },
+
+        {
+          archive: "paris.jpg",
+          name: "paris",
+          tooltip: "Capital of France",
+          description:
+            "The romantic capital of France, celebrated for its art, fashion, cuisine, and the Eiffel Tower.",
+        },
+        {
+          archive: "newyork.jpg",
+          name: "newyork",
+          tooltip: "Biggest city in the USA",
+          description:
+            "A fast-paced global city known for its skyline, Broadway, cultural diversity, and endless energy.",
+        },
+
+        {
+          archive: "londres.jpg",
+          name: "londres",
+          tooltip: "Capital of London",
+          description:
+            "A historic yet modern metropolis famous for its landmarks, diverse culture, and royal heritage.",
+        },
+      ];
+
+      let position = 0;
+      function next() {
+        position++;
+        if (position >= images.length) {
+          position = 0;
+        }
+        showImage(position);
+      }
+
+      function showImage(position) {
+        let image = ROUTE + images[position].archive;
+        IMG.src = image;
+        NAME.innerHTML = images[position].name;
+        IMG.title = images[position].tooltip;
+        DESC.innerHTML = images[position].description;
+      }
+
+      function back() {
+        position--;
+        if (position < 0) {
+          position = images.length - 1;
+        }
+        showImage(position);
+      }
+
+      showImage(position);
+
+      function lookFor() {
+        let input = INPUT.value.trim();
+        let length = images.length;
+        let indice = -1;
+        let i = 0;
+        console.log(input);
+        if (input == "") {
+          document.getElementById("output").innerHTML =
+            "Please insert a valid city";
+          return;
+        }
+        let found = false;
+        while (!found && i < length) {
+          if (input.toLowerCase() == images[i].name) {
+            found = true;
+            indice = i;
+          } 
+            i++;
+        }
+        if (found) {
+            showImage(indice);
+        } else {
+            document.getElementById("output").innerHTML = "The city requested is not present."
+            setInterval(() => {
+                document.getElementById("output").innerHTML = ""
+        },1000);
+      }
+    }
+    </script>
+  </body>
+</html>

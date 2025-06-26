@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f5;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.media-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  flex-direction: column; /* <-- assicura che img/video e testo si dispongano in colonna */
+}
+
+#img,
+#videoPlayer {
+  max-width: 100%;        /* <-- usa tutta la larghezza disponibile del contenitore */
+  max-height: 500px;      /* <-- opzionale: limite all'altezza per i video lunghi */
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin: 0 auto;         /* <-- centratura extra per fallback */
+  display: block;         /* <-- utile per la centratura nei contenitori */
+}
+
+.carousel-controls {
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.carousel-controls button {
+  padding: 2px 8px;
+  font-size: 14px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 140px;
+  transition: transform 0.2s ease;
+}
+
+/* Sposta i bottoni visivamente ai lati del centro */
+#btn-previous {
+  margin-right: 20px;
+}
+
+#btn-next {
+  margin-left: 20px;
+}
+.text-info {
+  max-width: 400px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+#nameImg {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#description {
+  font-size: 16px;
+  color: #444;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #777;
+}
